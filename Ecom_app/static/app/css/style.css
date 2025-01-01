@@ -1,0 +1,47 @@
+/* Ensure images are responsive and centered */
+.products img {
+    width: 200%; 
+    max-width: 250px; /* Set a smaller size for consistency */
+    height: auto; 
+    display: block;
+    margin: 0 auto;
+}
+
+/* Card container styling for equal sizes */
+.product {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #efe8e1;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    height: 100%; /* Ensure all cards have the same height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Equal height for columns */
+.row.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Make sure all columns have equal height */
+.row.container > .col-md-4 {
+    display: flex;
+    align-items: stretch;
+}
+
+/* Ensure consistent typography */
+.mlkpro {
+    color: #636362;
+    font-size: 20px;
+    line-height: 26px;
+    margin-top: 15px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+

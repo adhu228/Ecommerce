@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block main-content %}
+<div class="container text-center">
+    <h3>Payment was successful!</h3>
+    <p>Thank you for your purchase. Your order is being processed.</p>
+    
+    <!-- Add the GIF here -->
+    <img src="{% static 'app/images/success3.png' %}" alt="Success" class="img-fluid my-3">
+    
+   
+</div>
+
+<a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}
+Dairy Products Home
+{% endblock title %}
+
+{% block main-content %}
+<style>
+    /* Page Styling */
+    #map-container {
+        height: 300px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #333;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h4 {
+        color: #555;
+        font-weight: bold;
+    }
+
+    p {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .text-center {
+        font-weight: bold;
+    }
+
+    .row {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container my-5">
+    <!-- Page Header -->
+    <h2 class="text-center mb-4">Contact Us</h2>
+
+    <!-- Contact Details Section -->
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Contact Information</h4>
+            <p><strong>Name:</strong> Dairy Products Co.</p>
+            <p><strong>Email:</strong> info@dairyproducts.com</p>
+            <p><strong>Phone:</strong> +1-800-123-4567</p>
+            <p><strong>Address:</strong> 123, Dairy Lane, Springfield</p>
+        </div>
+
+        <!-- Map Section -->
+        <div class="col-md-6">
+            <h4>Find Us Here</h4>
+            <div id="map-container"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Leaflet.js Library -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    // Initialize the map and set its view to a specific location (latitude, longitude)
+    var map = L.map('map-container').setView([51.505, -0.09], 13);  // Default location (e.g., London)
+
+    // Add OpenStreetMap tile layer to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Get the user's current location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var userLat = position.coords.latitude;
+            var userLng = position.coords.longitude;
+
+            // Set the map view to the user's location
+            map.setView([userLat, userLng], 14);
+
+            // Add a marker to indicate the user's location
+            var marker = L.marker([userLat, userLng]).addTo(map);
+            marker.bindPopup("<b>You are here</b>").openPopup();
+        }, function() {
+            alert("Geolocation failed or permission denied.");
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+</script>
+
+{% endblock main-content %}

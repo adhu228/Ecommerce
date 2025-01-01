@@ -1,0 +1,108 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Cart{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        {% if cart %}
+        <h1 class="text-center mb-5">Shopping Cart</h1>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Cart</h3>
+                    {% for item in cart %}
+                    <div class="row mb-3" id="cart-item-{{ item.product.id }}">
+                        <div class="col-sm-3 text-center align-self-center">
+                            <img src="{{ item.product.product_image.url }}" alt="Product Image" 
+                                 class="img-fluid img-thumbnail shadow-sm" height="150" width="150">
+                        </div>
+                        <div class="col-sm-9">
+                            <h5>{{ item.product.title }}</h5>
+                            <p class="mb-2 text-muted small">{{ item.product.description }}</p>
+                            <div class="my-3">
+                                <label for="quantity">Quantity:</label>
+                                <a class="minus-cart btn" pid="{{ item.product.id }}">
+                                    <i class="fas fa-minus-square fa-lg"></i>
+                                </a>
+                                <span id="quantity">{{ item.quantity }}</span>
+                                <a class="plus-cart btn" pid="{{ item.product.id }}">
+                                    <i class="fas fa-plus-square fa-lg"></i>
+                                </a>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <!-- Remove button -->
+                                <a href="#" class="remove-cart btn btn-sm btn-secondary mr-3" pid="{{ item.product.id }}" 
+                                   data-url="{% url 'remove_cart' %}">
+                                    Remove Item
+                                </a>
+                                <p class="mb-0"><strong>Rs.{{ item.product.discounted_price }}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="text-muted">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Total Amount</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Amount<span id="amount">Rs.{{ amount }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Shipping<span>Rs.40.00</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>Total (incl. GST)</strong><span id="totalamount">Rs.{{ totalamount }}</span>
+                        </li>
+                    </ul>
+                    <div class="d-grid mt-3">
+                        <!-- Pass the total amount to the checkout page -->
+                        <a href="{% url 'checkout' %}?totalamount={{ totalamount }}" class="btn btn-primary">Place Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <h1 class="text-center mb-5">Cart is Empty</h1>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Include JavaScript -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('click', '.remove-cart', function (e) {
+        e.preventDefault();
+
+        var prod_id = $(this).attr('pid'); // Get the product ID
+        var url = $(this).data('url'); // Get the URL from the data-url attribute
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            data: { 'prod_id': prod_id },
+            success: function (response) {
+                if (response.cart_empty) {
+                    // If the cart is empty, display the empty cart message
+                    $('.container.my-5 .row').html('<h1 class="text-center mb-5">Cart is Empty</h1>');
+                } else {
+                    // Update the total amounts
+                    $('#amount').text('Rs.' + response.amount.toFixed(2));
+                    $('#totalamount').text('Rs.' + response.totalamount.toFixed(2));
+                    // Remove the specific cart item
+                    $('#cart-item-' + prod_id).remove();
+                }
+            },
+            error: function (xhr, status, error) {
+                alert('Remove Item.');
+            }
+        });
+    });
+</script>
+{% endblock main-content %}

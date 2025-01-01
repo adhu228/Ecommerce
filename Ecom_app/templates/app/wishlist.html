@@ -1,0 +1,76 @@
+{% extends 'app/base.html' %}  
+{% load static %}
+
+{% block title %}Wishlist{% endblock %}
+
+{% block main-content %}
+<div class="container my-5">
+    <h3 class="text-primary">Welcome, <span class="text-capitalize">{{ request.user.username }}</span></h3>
+    <div class="row">
+    
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid">
+                    <a href="{% url 'wishlist' %}" class="btn btn-primary">Wishlist</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main content area -->
+        <div class="col-sm-9 offset-sm-1">
+            <h2 class="text-success mb-4">Your Wishlist</h2>
+            
+            <!-- Wishlist items list -->
+            <div class="list-group">
+                {% for item in wishlist_items %}
+                    <div class="list-group-item d-flex justify-content-between align-items-center border rounded shadow-sm mb-3">
+                        <!-- Product Image and Info -->
+                        <div class="d-flex align-items-center">
+                            <img src="{{ item.product.product_image.url }}" alt="{{ item.product.name }}" class="img-fluid rounded-circle" style="width: 60px; height: 60px;">
+                            <div class="ms-3">
+                                <h5 class="mb-1 text-dark">{{ item.product.name }}</h5>
+                                <p class="mb-1 text-muted" style="font-size: 0.875rem;">{{ item.product.description|truncatewords:15 }}</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="btn-group">
+                            <a href="{% url 'product-detail' item.product.id %}" class="btn btn-info btn-sm">View Product</a>
+                            <a href="{% url 'minuswishlist' item.product.id %}" class="btn btn-danger btn-sm">Remove</a>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="alert alert-warning" role="alert">Your wishlist is empty.</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom CSS for additional styling -->
+<style>
+    .list-group-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .list-group-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .text-success {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    .btn-info {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+    .btn-group .btn {
+        margin-left: 5px;
+    }
+</style>
+
+{% endblock %}

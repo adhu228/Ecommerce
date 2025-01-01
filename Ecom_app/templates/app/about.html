@@ -1,0 +1,122 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}
+Dairy Products Home
+{% endblock title %}
+
+{% block main-content %}
+    <div class="container py-5">
+        <!-- About Section -->
+        <h2 class="text-center mb-4 heading-style">About Us</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-style">
+                    <div class="card-body">
+                        <p class="fs-4 text-center paragraph-style">
+                            Dairy products include common grocery store foods around the world, such as yogurt, cheese, milk, and butter. A facility that produces dairy products is called a dairy. We aim to provide fresh and healthy dairy options to people everywhere.
+                        </p>
+                        <p class="fs-4 text-center paragraph-style">
+                            From farm-fresh milk to premium cheeses, we ensure that each product we create is full of flavor and nutritional value. Our products cater to every need, from indulgence to daily essentials.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- Our Mission Section -->
+        <h2 class="text-center mb-4 heading-style">Our Mission</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-style">
+                    <div class="card-body">
+                        <p class="fs-4 text-center paragraph-style">
+                            Our mission is simple: To deliver goodness by offering safe, hygienic, and high-quality dairy products and ingredients that meet international standards.
+                        </p>
+                        <p class="fs-4 text-center paragraph-style">
+                            We are committed to providing our customers with top-notch products while maintaining ethical practices and contributing to a sustainable future. We partner with farmers who share our commitment to quality, sustainability, and animal welfare.
+                        </p>
+                        <p class="fs-4 text-center paragraph-style">
+                            With our focus on innovation and customer satisfaction, we continuously strive to improve our processes and expand our product range. Our goal is to be your trusted partner for all things dairy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <!-- Call to Action Section -->
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h3 class="mb-4 heading-style">Join Us in the Journey of Quality Dairy!</h3>
+                <p class="fs-5 paragraph-style">
+                    Whether you're looking for a healthy snack or high-quality ingredients for your recipes, we’ve got you covered. Explore our products and experience the goodness of dairy at its finest.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock main-content %}
+
+{% block styles %}
+    <style>
+        /* Heading Style */
+        .heading-style {
+            font-size: 2.5rem; /* Larger font size for headings */
+            font-weight: bold;
+            color: #2c3e50; /* Darker color for contrast */
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        /* Custom Paragraph Style */
+        .paragraph-style {
+            font-size: 1.2rem; /* Adjust paragraph font size */
+            line-height: 1.6; /* Increase line height for readability */
+            color: #7f8c8d; /* Set text color */
+            text-align: justify; /* Justify text for better alignment */
+        }
+
+        /* Card Style */
+        .card-style {
+            border: 1px solid #e0e0e0; /* Light border around cards */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            margin-bottom: 30px; /* Space between cards */
+            background-color: #fff; /* White background for cards */
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .card-style .card-body p {
+            font-size: 1.2rem; /* Ensure text inside card body is consistent */
+        }
+
+        /* Call to Action Style */
+        .call-to-action {
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .heading-style {
+                font-size: 2rem; /* Smaller heading font size for mobile */
+            }
+
+            .paragraph-style {
+                font-size: 1rem; /* Smaller font size for mobile */
+            }
+
+            .call-to-action {
+                font-size: 1.2rem; /* Adjust CTA text for mobile */
+            }
+        }
+    </style>
+{% endblock %}
